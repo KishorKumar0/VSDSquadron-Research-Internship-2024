@@ -92,6 +92,7 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    ```
    $ ls -ltr filename.o
    ```
+   ![image](./Task1/riscv_gcc_copiler.png)
 3. **Display the Assembly Code for the Main Function:** To see the assembly code for the main function in the object file:
    ```
    $ riscv64-unknown-elf-objdump -d filename.o
@@ -100,7 +101,9 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    ```
    $ riscv64-unknown-elf-objdump -d filename.o | less
    ```
+   ![image](./Task1/optimized_assembly.png)
 5. **Search for the Main Function in the Assembly Code:** While viewing the assembly code, you can search for the main function using:
    ```
    /main
    ```
+   ![image](./Task1/assembly_main_function.png)
