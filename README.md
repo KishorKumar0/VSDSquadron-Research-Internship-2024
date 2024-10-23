@@ -30,7 +30,7 @@ To set up Ubuntu on VirtualBox, follow the steps below:
 1. Launch **VirtualBox**.
 2. Click on the **"New"** button to create a new virtual machine.
 3. Fill in the details as follows:
-   - Name: Any preferred name (e.g., `RISC-V Workshop`)
+   - Name: Any preferred name (e.g., `vsdWorkshop`)
    - Type: **Linux**
    - Version: **Ubuntu (64-bit)** (Ensure this matches with Ubuntu 18.04 in the provided VDI file)
 4. Allocate memory (RAM) to the virtual machine. Typically, 4GB or more is recommended.
