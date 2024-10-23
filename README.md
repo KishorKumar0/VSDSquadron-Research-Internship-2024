@@ -56,6 +56,7 @@ To start, we will write and run a simple C program using the **leafpad** text ed
    ```bash
    $ sudo apt install leafpad
    ```
+   ![image](./Task1/leafpad_installation_terminal.png)
 2. **Navigate to the Home Directory:**
    ```
    $ cd
@@ -68,11 +69,12 @@ To start, we will write and run a simple C program using the **leafpad** text ed
    ```
    $ gcc filename.c
    ```
+   ![image](./Task1/leafpad_editor.png)
 5. **Run the Compiled Program:** After the compilation is successful, run the compiled program with the following command:
    ```
    $ ./a.out
    ```
-   
+   ![image](./Task1/sum1ton_output.png)
 ### 2. Compile C Code with RISC-V Compiler
 
 Now, let’s compile the C code using the RISC-V compiler and examine the assembly code generated from the C program.
