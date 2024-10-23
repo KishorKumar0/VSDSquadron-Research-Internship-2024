@@ -1,1 +1,1 @@
-# VSDSquadron-Research-Internship-2024
+# VSDSquadronmini Research Internship-2024
