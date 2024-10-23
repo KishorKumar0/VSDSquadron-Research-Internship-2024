@@ -92,7 +92,7 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    ```
    $ ls -ltr filename.o
    ```
-   ![image](./Task1/riscv_gcc_copiler.png)
+   ![image](./Task1/riscv_gcc_compiler.png)
 3. **Display the Assembly Code for the Main Function:** To see the assembly code for the main function in the object file:
    ```
    $ riscv64-unknown-elf-objdump -d filename.o
