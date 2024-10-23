@@ -42,3 +42,63 @@ To set up Ubuntu on VirtualBox, follow the steps below:
 6. Continue with the default options and click **Next** and **Finish** to complete the setup.
 7. Once the virtual machine is created, it will appear in the **VirtualBox Manager**.
 8. Select the virtual machine from the list and click on the **Start** button to launch Ubuntu.
+
+## Part 2: Writing and Evaluating C Code Along with RISC-V Assembly Code
+
+In this section, we will write, compile, and evaluate a simple C program. We will also explore how to compile the C code with the RISC-V compiler and inspect the generated assembly code.
+
+### 1. Compile and Run the C Code
+
+To start, we will write and run a simple C program using the **leafpad** text editor. Follow the steps below to accomplish this.
+
+#### Steps:
+1. **Install leafpad text editor:**
+   ```bash
+   $ sudo apt install leafpad
+   ```
+2. **Navigate to the Home Directory:**
+   ```
+   $ cd
+   ```
+3. **Write a Simple C Program:** Use the following command to open Leafpad and write a simple C program. Replace `filename.c` with your desired filename:
+   ```
+   $ leafpad filename.c &
+   ```
+4. **Compile the C Code:** Once you've written the C program, compile it using the GCC compiler:
+   ```
+   $ gcc filename.c
+   ```
+5. **Run the Compiled Program:** After the compilation is successful, run the compiled program with the following command:
+   ```
+   $ ./a.out
+   ```
+   
+### 2. Compile C Code with RISC-V Compiler
+
+Now, let’s compile the C code using the RISC-V compiler and examine the assembly code generated from the C program.
+
+#### Steps:
+1. **Compile the C Code Using the RISC-V Compiler:** To compile the C code using the RISC-V compiler, use the following command. Replace `filename.c` with the actual C file name:
+   ```
+   $ riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o filename.o filename.c
+   ```
+   ###Here:
+   - `-O1`: Optimization level.
+   - `-march=rv64i`: Target architecture is RISC-V 64-bit integer base.
+   - `-march=rv64i`: Target architecture is RISC-V 64-bit integer base.
+2. **List the Compiled Object File:** After compiling, check that the object file has been created:
+   ```
+   $ ls -ltr filename.o
+   ```
+3. **Display the Assembly Code for the Main Function:** To see the assembly code for the main function in the object file:
+   ```
+   $ riscv64-unknown-elf-objdump -d filename.o
+   ```
+4. **Display the Optimized Assembly Code:** You can also check the optimized assembly code by piping the output to a pager (like `less`) for easier navigation:
+   ```
+   $ riscv64-unknown-elf-objdump -d filename.o | less
+   ```
+5. **Search for the Main Function in the Assembly Code:** While viewing the assembly code, you can search for the main function using:
+   ```
+   /main
+   ```
