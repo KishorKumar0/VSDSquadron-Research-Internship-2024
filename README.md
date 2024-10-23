@@ -24,7 +24,7 @@ To set up Ubuntu on VirtualBox, follow the steps below:
 
 #### Prerequisites:
 - Ensure that your **C:** or **D:** drive has at least **100GB** of free space.
-- Download the **ZIPPED** Ubuntu Virtual Machine Image from [here](https://forgefunder.com/~kunal/riscv_workshop.vdi).
+- Download the Ubuntu Virtual Disk Image file from [here](https://forgefunder.com/~kunal/riscv_workshop.vdi).
 
 #### Steps to Set Up the Ubuntu Virtual Machine:
 1. Launch **VirtualBox**.
