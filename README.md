@@ -65,11 +65,11 @@ To start, we will write and run a simple C program using the **leafpad** text ed
    ```
    $ leafpad filename.c &
    ```
+   ![image](./Task1/leafpad_editor.png)
 4. **Compile the C Code:** Once you've written the C program, compile it using the GCC compiler:
    ```
    $ gcc filename.c
    ```
-   ![image](./Task1/leafpad_editor.png)
 5. **Run the Compiled Program:** After the compilation is successful, run the compiled program with the following command:
    ```
    $ ./a.out
