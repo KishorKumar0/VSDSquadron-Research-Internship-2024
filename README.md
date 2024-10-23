@@ -1,5 +1,5 @@
 # VSDSquadronmini Research Internship-2024
-## TASK 1: INTRODUCTION
+# TASK 1: Introduction
 
 ## Part 1: Installing the Required Programs and Software for the Internship
 
