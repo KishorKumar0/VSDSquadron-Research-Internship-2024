@@ -27,27 +27,27 @@ To set up Ubuntu on VirtualBox, follow the steps below:
 - Download the Ubuntu Virtual Disk Image file from [riscv workshop.vdi](https://forgefunder.com/~kunal/riscv_workshop.vdi).
 
 #### Steps to Set Up the Ubuntu Virtual Machine:
-1. Launch **VirtualBox**.
-2. Click on the **"New"** button to create a new virtual machine.
-3. Fill in the details as follows:
+1.Launch **VirtualBox**.
+2.Click on the **"New"** button to create a new virtual machine.
+3.Fill in the details as follows:
    - Name: Any preferred name (e.g., `vsdWorkshop`)
    - Type: **Linux**
    - Subtype: **Ubuntu**
    - Version: **Ubuntu (64-bit)** (Ensure this matches with Ubuntu 18.04 in the provided VDI file)
 
 ![image](./Task1/step1.png)
-4. Allocate memory (RAM) to the virtual machine. Typically, 4GB or more is recommended.
+4.Allocate memory (RAM) to the virtual machine. Typically, 4GB or more is recommended.
 
 ![image](./Task1/hardware.png)
-6. Create a virtual hard disk:
+5.Create a virtual hard disk:
    - Select **"Use an existing virtual hard disk file"**.
    - Browse to the location where the **VDI file** (from the link above) is saved.
    - Select the downloaded/unzipped **VDI** file and click **Open**.
-7. Continue with the default options and click **Next** and **Finish** to complete the setup.
+6.Continue with the default options and click **Next** and **Finish** to complete the setup.
 
 ![image](./Task1/harddisk.png)
-8. Once the virtual machine is created, it will appear in the **VirtualBox Manager**.
-9. Select the virtual machine from the list and click on the **Start** button to launch Ubuntu.
+7.Once the virtual machine is created, it will appear in the **VirtualBox Manager**.
+8.Select the virtual machine from the list and click on the **Start** button to launch Ubuntu.
 
 ## Part 2: Writing and Evaluating C Code Along with RISC-V Assembly Code
 
@@ -113,3 +113,4 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    /main
    ```
    ![image](./Task1/assembly_main_function.png)
+
