@@ -90,7 +90,7 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    ```
    $ riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o filename.o filename.c
    ```
-   ###Here:
+   ##### Here:
    - `-O1`: Optimization level.
    - `-march=rv64i`: Target architecture is RISC-V 64-bit integer base.
    - `-march=rv64i`: Target architecture is RISC-V 64-bit integer base.
@@ -113,4 +113,24 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    /main
    ```
    ![image](./Task1/assembly_main_function.png)
+
+6. Compile the Program with RISC-V Compiler: Use the following command to compile the C program using the RISC-V compiler:
+   ```
+   $ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
+   ```
+   ##### Here:
+   - `-Ofast`: Optimization level.
+   - `-march=rv64i`: Target architecture is RISC-V 64-bit integer base.
+   - `-march=rv64i`: Target architecture is RISC-V 64-bit integer base.
+7. Run the Program on RISC-V Spike Simulator: To execute the compiled RISC-V program, use the Spike simulator, which is an ISA simulator for RISC-V:
+   ```
+   $ spike pk sum1ton.o
+   ```
+   - This command runs the program using the Proxy Kernel (pk) on Spike.
+8. Debugging and Viewing Assembly in Spike: To see a detailed view of the program execution, run Spike with debugging enabled:
+   ```
+   $ spike -d pk sum1ton.o
+   ```
+   - After this command, you will see a sequence of RISC-V assembly instructions being executed.
+   - You can step through each instruction and inspect registers and memory addresses.
 
