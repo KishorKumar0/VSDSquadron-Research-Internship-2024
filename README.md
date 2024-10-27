@@ -67,7 +67,7 @@ To start, we will write and run a simple C program using the **leafpad** text ed
    ```
    $ cd
    ```
-3. **Write a Simple C Program:** Use the following command to open Leafpad and write a simple C program. Replace `filename.c` with your desired filename:
+3. **Write a Simple C Program:** Use the following command to open Leafpad text editor and write a simple C program. Replace `filename.c` with your desired filename:
    ```
    $ leafpad filename.c &
    ```
