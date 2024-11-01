@@ -137,3 +137,35 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    - You can step through each instruction and inspect registers and memory addresses.
    ![image](./Task1/assembly_execution.png)
 
+# Simple CPU Emulator
+
+This is a simple CPU emulator program written in C. It simulates a basic CPU architecture with four registers, a program counter, 256 bytes of memory, and basic arithmetic and jump instructions.
+
+## Features
+
+- **Registers**: Four registers (A, B, C, D).
+- **Memory**: 256 bytes of memory.
+- **Instructions**: Supports MOV, ADD, SUB, JMP, and HLT instructions.
+- **Flags**: Zero flag and carry flag for arithmetic operations.
+- **Interactive Input**: Allows user inputs for initial values in registers A and B.
+- **Loop & Halt**: Includes a jump loop and a halt condition.
+
+## Instructions
+
+### Supported Opcodes
+
+| Opcode | Instruction     | Description                              |
+|--------|-----------------|------------------------------------------|
+| `0x01` | `MOV reg, imm`  | Moves an immediate value to a register. |
+| `0x02` | `ADD reg1, reg2`| Adds values in two registers.           |
+| `0x03` | `SUB reg1, reg2`| Subtracts value in one register from another. |
+| `0x04` | `JMP address`   | Jumps to a specified address.           |
+| `0xFF` | `HLT`           | Halts the CPU.                          |
+
+## Program Structure
+
+1. **CPU Setup**: Initializes the CPU with a program counter, registers, memory, and flags.
+2. **Program Execution**: Executes instructions in memory starting from the first instruction.
+3. **Interactive Mode**: Prompts user for values to load into registers A and B and then executes a sample program.
+4. **Loop Option**: Allows users to run the program multiple times with different inputs.
+
