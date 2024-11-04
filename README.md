@@ -137,7 +137,7 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    - You can step through each instruction and inspect registers and memory addresses.
    ![image](./Task1/assembly_execution.png)
 
-# Simple CPU Emulator
+# CPU Emulator
 
 This is a simple CPU emulator program written in C. It simulates a basic CPU architecture with four registers, a program counter, 256 bytes of memory, and basic arithmetic and jump instructions.
 
