@@ -130,7 +130,7 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    ```
    - This command runs the program using the Proxy Kernel (pk) on Spike.
      
-     ![image](./Task1/spike_debugger.png)
+   ![image](./Task1/spike_debugger.png)
 8. **Debugging and Viewing Assembly in Spike:** To see a detailed view of the program execution, run Spike with debugging enabled:
    ```
    $ spike -d pk sum1ton.o
