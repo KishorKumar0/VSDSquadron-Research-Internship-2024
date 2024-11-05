@@ -184,5 +184,12 @@ This is a simple CPU emulator program written in C. It simulates a basic CPU arc
 4. **State Printing**: After each instruction, the emulator prints the CPU’s current state, including register values, the program counter, and flag status.
 5. **Interactive Mode**: The program prompts users to input values for registers A and B at runtime, allowing repeated executions with different inputs.
 
+## Sample Program Execution
+For example, a program may:
+- Move a user-defined value into register A, another into register B.
+- Add registers A and B, storing the result in A.
+- Move a constant into register C.
+- Subtract the value of C from A.
+- Jump back to the start, creating an infinite loop.
 
 
