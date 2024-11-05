@@ -122,12 +122,14 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    - `-Ofast`: Optimization level.
    - `-march=rv64i`: Target architecture is RISC-V 64-bit integer base.
    - `-march=rv64i`: Target architecture is RISC-V 64-bit integer base.
+     
    ![image](./Task1/spike_simulator.png)
 7. **Run the Program on RISC-V Spike Simulator:** To execute the compiled RISC-V program, use the Spike simulator, which is an ISA simulator for RISC-V:
    ```
    $ spike pk sum1ton.o
    ```
    - This command runs the program using the Proxy Kernel (pk) on Spike.
+     
      ![image](./Task1/spike_debugger.png)
 8. **Debugging and Viewing Assembly in Spike:** To see a detailed view of the program execution, run Spike with debugging enabled:
    ```
@@ -335,5 +337,6 @@ For example, a program may:
 - Move a constant into register C.
 - Subtract the value of C from A.
 - Jump back to the start, creating an infinite loop.
+  
 ![image](./Task1/cpu_output.png)
 
