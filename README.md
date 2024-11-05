@@ -169,7 +169,151 @@ This is a simple CPU emulator program written in C. It simulates a basic CPU arc
    - **Format**: JMP address
 4. **HLT**: Halts the CPU.
    - **Opcode**: 0xFF
+#### code
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
+// Define CPU structure
+typedef struct CPU {
+    unsigned char registers[4];   // Registers: A, B, C, D
+    unsigned char pc;             // Program Counter
+    unsigned char memory[256];    // 256 bytes of memory
+    unsigned char zero_flag;      // Zero Flag
+    unsigned char carry_flag;     // Carry Flag
+} CPU;
+
+// Enum to identify registers easily
+enum { A, B, C, D };
+
+// Opcodes for each instruction
+enum {
+    MOV = 0x01,  // MOV reg, immediate (0x01 reg imm)
+    ADD = 0x02,  // ADD reg1, reg2 (0x02 reg1 reg2)
+    SUB = 0x03,  // SUB reg1, reg2 (0x03 reg1 reg2)
+    JMP = 0x04,  // JMP address (0x04 address)
+    HLT = 0xFF   // HLT (0xFF)
+};
+
+// Function to reset CPU
+void resetCPU(CPU *cpu) {
+    cpu->pc = 0;
+    cpu->zero_flag = 0;
+    cpu->carry_flag = 0;
+    for (int i = 0; i < 4; i++) cpu->registers[i] = 0;
+    for (int i = 0; i < 256; i++) cpu->memory[i] = 0;
+}
+
+// Function to load a program into memory
+void loadProgram(CPU *cpu, unsigned char *program, int size) {
+    for (int i = 0; i < size; i++) {
+        cpu->memory[i] = program[i];
+    }
+}
+
+// Function to print CPU state for debugging
+void printCPUState(CPU *cpu) {
+    printf("PC: %02X | A: %02X B: %02X C: %02X D: %02X | ZF: %d CF: %d\n",
+           cpu->pc, cpu->registers[A], cpu->registers[B], cpu->registers[C],
+           cpu->registers[D], cpu->zero_flag, cpu->carry_flag);
+}
+
+// Function to execute the instructions
+void execute(CPU *cpu) {
+    int running = 1;
+    while (running) {
+        unsigned char opcode = cpu->memory[cpu->pc++]; // Fetch instruction
+
+        switch (opcode) {
+            case MOV: {
+                // MOV reg, imm
+                unsigned char reg = cpu->memory[cpu->pc++];
+                unsigned char value = cpu->memory[cpu->pc++];
+                cpu->registers[reg] = value;
+                break;
+            }
+            case ADD: {
+                // ADD reg1, reg2
+                unsigned char reg1 = cpu->memory[cpu->pc++];
+                unsigned char reg2 = cpu->memory[cpu->pc++];
+                unsigned short result = cpu->registers[reg1] + cpu->registers[reg2];
+                
+                cpu->carry_flag = (result > 0xFF);  // Set carry flag if overflow
+                cpu->registers[reg1] = result & 0xFF; // Store result in reg1
+                cpu->zero_flag = (cpu->registers[reg1] == 0); // Set zero flag if result is 0
+                break;
+            }
+            case SUB: {
+                // SUB reg1, reg2
+                unsigned char reg1 = cpu->memory[cpu->pc++];
+                unsigned char reg2 = cpu->memory[cpu->pc++];
+                unsigned short result = cpu->registers[reg1] - cpu->registers[reg2];
+                
+                cpu->carry_flag = (cpu->registers[reg1] < cpu->registers[reg2]);
+                cpu->registers[reg1] = result & 0xFF; // Store result in reg1
+                cpu->zero_flag = (cpu->registers[reg1] == 0); // Set zero flag if result is 0
+                break;
+            }
+            case JMP: {
+                // JMP address
+                unsigned char address = cpu->memory[cpu->pc++];
+                cpu->pc = address;
+                break;
+            }
+            case HLT: {
+                // HLT
+                running = 0;
+                break;
+            }
+            default:
+                printf("Unknown opcode: %02X\n", opcode);
+                running = 0;
+                break;
+        }
+
+        // Print CPU state after each instruction
+        printCPUState(cpu);
+    }
+}
+
+int main() {
+    CPU cpu;
+    unsigned char in1, in2;
+    char continue_flag;
+
+    do {
+        // Reset CPU for each run
+        resetCPU(&cpu);
+
+        // Take inputs for registers A and B
+        printf("Enter value for in1 (to be moved to register A): ");
+        scanf("%hhu", &in1);
+        printf("Enter value for in2 (to be moved to register B): ");
+        scanf("%hhu", &in2);
+
+        // Sample program with all instructions
+        unsigned char program[] = {
+            MOV, A, in1,         // MOV A, in1
+            MOV, B, in2,         // MOV B, in2
+            ADD, A, B,           // ADD A, B (A = in1 + in2)
+            MOV, C, 5,           // MOV C, 5
+            SUB, D, C,           // SUB A, C (A = (in1 + in2) - 5)
+            JMP, 0x01,           // JMP to address 0 (loop to the beginning)
+            HLT                  // HLT (never reached due to JMP loop)
+        };
+
+        // Load and execute program
+        loadProgram(&cpu, program, sizeof(program));
+        execute(&cpu);
+
+        // Ask if user wants to run again
+        printf("Do you want to enter new values and run the program again? (y/n): ");
+        scanf(" %c", &continue_flag);  // The space before %c handles trailing newline from previous input
+    } while (continue_flag == 'y' || continue_flag == 'Y');
+
+    return 0;
+}
+```
 ## Emulator Operation
 
 1. **Program Loading**: The program is loaded into the CPU’s memory from address 0.
