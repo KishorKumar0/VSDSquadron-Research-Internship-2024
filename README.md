@@ -191,5 +191,5 @@ For example, a program may:
 - Move a constant into register C.
 - Subtract the value of C from A.
 - Jump back to the start, creating an infinite loop.
-![image](./Task1/cpu output.png)
+![image](./Task1/cpu_output.png)
 
