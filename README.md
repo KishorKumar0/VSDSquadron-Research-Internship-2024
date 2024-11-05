@@ -137,6 +137,7 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
    ```
    - After this command, you will see a sequence of RISC-V assembly instructions being executed.
    - You can step through each instruction and inspect registers and memory addresses.
+     
    ![image](./Task1/assembly_execution.png)
 
 # CPU Emulator
