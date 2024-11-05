@@ -143,29 +143,46 @@ This is a simple CPU emulator program written in C. It simulates a basic CPU arc
 
 ## Features
 
-- **Registers**: Four registers (A, B, C, D).
-- **Memory**: 256 bytes of memory.
-- **Instructions**: Supports MOV, ADD, SUB, JMP, and HLT instructions.
-- **Flags**: Zero flag and carry flag for arithmetic operations.
-- **Interactive Input**: Allows user inputs for initial values in registers A and B.
-- **Loop & Halt**: Includes a jump loop and a halt condition.
+- **Registers (A, B, C, D)**: Storage locations within the CPU, used to hold values for computations and instructions.
+- **Program Counter (PC)**: Keeps track of the current instruction address in memory.
+- **Memory**: 256 bytes of memory, where the program instructions are loaded and executed.
+- **Flags**:
+   - **Zero Flag (ZF)**: Set to 1 if the result of an arithmetic operation is zero.
+   - **Carry Flag (CF)**: Set to 1 if an arithmetic operation results in an overflow (exceeds 8 bits).
 
-## Instructions
 
-### Supported Opcodes
+## Supported Instructions (Opcodes)
 
-| Opcode | Instruction     | Description                              |
-|--------|-----------------|------------------------------------------|
-| `0x01` | `MOV reg, imm`  | Moves an immediate value to a register. |
-| `0x02` | `ADD reg1, reg2`| Adds values in two registers.           |
-| `0x03` | `SUB reg1, reg2`| Subtracts value in one register from another. |
-| `0x04` | `JMP address`   | Jumps to a specified address.           |
-| `0xFF` | `HLT`           | Halts the CPU.                          |
+1. **MOV**: Moves an immediate value into a register.
+   - **Opcode**: 0x01
+   - **Format**: MOV reg, imm (e.g., MOV A, 5)
+2. **ADD**: Adds the values of two registers, storing the result in the first register.
+   - **Opcode**: 0x02
+   - **Format**: ADD reg1, reg2 (e.g., ADD A, B)
+   - **Flags**: Sets the carry flag if the result exceeds 255 and the zero flag if the result is 0.
+3. **SUB**: Subtracts the value of one register from another, storing the result in the first register.
+   - **Opcode**: 0x03
+   - **Format**: SUB reg1, reg2 (e.g., SUB A, C)
+   - **Flags**: Sets the carry flag if the result is negative and the zero flag if the result is 0.
+3. **JMP**: Jumps to a specified memory address.
+   - **Opcode**: 0x04
+   - **Format**: JMP address
+4. **HLT**: Halts the CPU.
+   - **Opcode**: 0xFF
 
-## Program Structure
+## Emulator Operation
 
-1. **CPU Setup**: Initializes the CPU with a program counter, registers, memory, and flags.
-2. **Program Execution**: Executes instructions in memory starting from the first instruction.
-3. **Interactive Mode**: Prompts user for values to load into registers A and B and then executes a sample program.
-4. **Loop Option**: Allows users to run the program multiple times with different inputs.
+1. **Program Loading**: The program is loaded into the CPU’s memory from address 0.
+2. **Execution Cycle**:
+   - The program counter (PC) points to the current instruction address in memory.
+   - The emulator fetches the instruction, increments the PC, and then executes the instruction      according to its opcode.
+3. **Instruction Execution**:
+   - **MOV** loads a specific register with an immediate value.
+   - **ADD** and **SUB** perform arithmetic on the values of registers, updating the zero and         carry flags    as needed.
+   - **JMP** modifies the program counter to execute instructions at a different address.
+   - **HLT** stops execution, ending the program.
+4. **State Printing**: After each instruction, the emulator prints the CPU’s current state, including register values, the program counter, and flag status.
+5. **Interactive Mode**: The program prompts users to input values for registers A and B at runtime, allowing repeated executions with different inputs.
+
+
 
