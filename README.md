@@ -140,11 +140,11 @@ Now, let’s compile the C code using the RISC-V compiler and examine the assemb
      
    ![image](./Task1/assembly_execution.png)
 
-# CPU Emulator
+## Part 2: CPU Emulator using C language
 
 This is a simple CPU emulator program written in C. It simulates a basic CPU architecture with four registers, a program counter, 256 bytes of memory, and basic arithmetic and jump instructions.
 
-## Features
+### Features
 
 - **Registers (A, B, C, D)**: Storage locations within the CPU, used to hold values for computations and instructions.
 - **Program Counter (PC)**: Keeps track of the current instruction address in memory.
@@ -154,7 +154,7 @@ This is a simple CPU emulator program written in C. It simulates a basic CPU arc
    - **Carry Flag (CF)**: Set to 1 if an arithmetic operation results in an overflow (exceeds 8 bits).
 
 
-## Supported Instructions (Opcodes)
+### Supported Instructions (Opcodes)
 
 1. **MOV**: Moves an immediate value into a register.
    - **Opcode**: 0x01
@@ -317,7 +317,7 @@ int main() {
     return 0;
 }
 ```
-## Emulator Operation
+### Emulator Operation
 
 1. **Program Loading**: The program is loaded into the CPU’s memory from address 0.
 2. **Execution Cycle**:
@@ -331,7 +331,7 @@ int main() {
 4. **State Printing**: After each instruction, the emulator prints the CPU’s current state, including register values, the program counter, and flag status.
 5. **Interactive Mode**: The program prompts users to input values for registers A and B at runtime, allowing repeated executions with different inputs.
 
-## Sample Program Execution
+### Sample Program Execution
 For example, a program may:
 - Move a user-defined value into register A, another into register B.
 - Add registers A and B, storing the result in A.
