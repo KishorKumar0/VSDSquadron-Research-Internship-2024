@@ -437,3 +437,148 @@ J-type instructions enable **unconditional jumps** within the code. The 20-bit i
    - Hexadecimal: 0x13E12923
 ##### Explanation:
 This instruction stores the value in register s9 at the memory address offset by 312 bytes from sp (stack pointer).
+
+3. ld ra, 392(sp)
+Type: I-Type
+Opcode (ld - Load Doubleword): 0000011 (7 bits)
+Fields:
+rd (ra): x1 = 00001 (5 bits)
+rs1 (sp): x2 = 00010 (5 bits)
+funct3: 011 (3 bits for load doubleword)
+Immediate (392): 000110001000 (12 bits)
+32-Bit Instruction Encoding:
+Binary: 000110001000 00010 011 00001 0000011
+Hexadecimal: 0x18810283
+Explanation:
+This instruction loads a doubleword from the memory address at 392 bytes offset from sp (stack pointer) into the ra register (return address).
+
+4. lui s8, 0x2b
+Type: U-Type
+Opcode (lui - Load Upper Immediate): 0110111 (7 bits)
+Fields:
+rd (s8): x24 = 11000 (5 bits)
+Immediate (0x2b): 000000000000000000101011 (upper 20 bits)
+32-Bit Instruction Encoding:
+Binary: 000000000000000000101011 11000 0110111
+Hexadecimal: 0x02b1837
+Explanation:
+This instruction loads the 20-bit immediate value 0x2b into the upper 20 bits of the s8 register. The lower 12 bits of s8 are set to zero.
+
+5. li a2, 256
+Type: I-Type
+Opcode (addi): 0010011 (7 bits)
+Fields:
+rd (a2): x12 = 01100 (5 bits)
+rs1 (x0): x0 = 00000 (5 bits)
+funct3: 000 (3 bits for add immediate)
+Immediate (256): 000010000000 (12 bits)
+32-Bit Instruction Encoding:
+Binary: 000010000000 00000 000 01100 0010011
+Hexadecimal: 0x10000693
+Explanation:
+This instruction loads 256 into register a2 by adding 256 to the value in x0 (which is always zero).
+
+6. sb zero, 301(sp)
+Type: S-Type
+Opcode (sb - Store Byte): 0100011 (7 bits)
+Fields:
+imm (301): 100101101 (12-bit immediate, split as imm[11:5] and imm[4:0])
+imm[11:5]: 1001011 (7 bits)
+imm[4:0]: 01101 (5 bits)
+rs1 (sp): x2 = 00010 (5 bits)
+rs2 (zero): x0 = 00000 (5 bits)
+funct3: 000 (3 bits for store byte)
+32-Bit Instruction Encoding:
+Binary: 1001011 00000 00010 000 01101 0100011
+Hexadecimal: 0x4B016023
+Explanation:
+This instruction stores the least significant byte from register zero (always 0) into the memory address calculated by adding 301 to the stack pointer (sp).
+
+7. sw zero, 40(sp)
+Type: S-Type
+Opcode (sw - Store Word): 0100011 (7 bits)
+Fields:
+imm (40): 000000010100 (12-bit immediate, split as imm[11:5] and imm[4:0])
+imm[11:5]: 0000000 (7 bits)
+imm[4:0]: 10100 (5 bits)
+rs1 (sp): x2 = 00010 (5 bits)
+rs2 (zero): x0 = 00000 (5 bits)
+funct3: 010 (3 bits for store word)
+32-Bit Instruction Encoding:
+Binary: 0000000 00000 00010 010 10100 0100011
+Hexadecimal: 0x02802023
+Explanation:
+This instruction stores the 4-byte word from register zero (which holds 0) into the memory address calculated by adding 40 to the stack pointer (sp).
+
+8. jal ra, 108b8 <memset>
+Type: J-Type
+Opcode (jal - Jump and Link): 1101111 (7 bits)
+Fields:
+rd (ra): x1 = 00001 (5 bits)
+Immediate (108b8): 000000001000100111011000 (20-bit immediate, split across fields)
+Target Address: 0x108b8, which is the offset to the memset function.
+32-Bit Instruction Encoding:
+Binary: 000000001000100111011000 00001 1101111
+Hexadecimal: 0x108B8F7F
+Explanation:
+This instruction performs an unconditional jump to the address 0x108b8 (i.e., memset) and saves the return address (the address of the instruction following the jump) in the ra (return address) register.
+
+9. lbu a5, 13(sp)
+Type: I-Type
+Opcode (lbu - Load Byte Unsigned): 0000011 (7 bits)
+Fields:
+rd (a5): x15 = 01111 (5 bits)
+rs1 (sp): x2 = 00010 (5 bits)
+funct3: 100 (3 bits for load byte unsigned)
+Immediate (13): 0000000001101 (12 bits)
+32-Bit Instruction Encoding:
+Binary: 0000000001101 00010 100 01111 0000011
+Hexadecimal: 0x00D30393
+Explanation:
+This instruction loads an unsigned byte from the memory address 13 bytes offset from the stack pointer (sp) into register a5.
+
+10. andi a5, a5, 223
+Type: I-Type
+Opcode (andi - AND Immediate): 0010011 (7 bits)
+Fields:
+rd (a5): x15 = 01111 (5 bits)
+rs1 (a5): x15 = 01111 (5 bits)
+funct3: 111 (3 bits for AND immediate)
+Immediate (223): 000000001110111 (12 bits)
+32-Bit Instruction Encoding:
+Binary: 000000001110111 01111 111 01111 0010011
+Hexadecimal: 0x00DE7393
+Explanation:
+This instruction performs a bitwise AND operation between the value in register a5 and the immediate value 223, storing the result back in a5.
+
+11. beq a5, s2, 10108 <main+0x58>
+Type: B-Type
+Opcode (beq - Branch if Equal): 1100011 (7 bits)
+Fields:
+rs1 (a5): x15 = 01111 (5 bits)
+rs2 (s2): x18 = 10010 (5 bits)
+funct3: 000 (3 bits for "equal" comparison)
+Immediate (10108): 00000000101000001000 (12-bit immediate, split across fields)
+32-Bit Instruction Encoding:
+Binary: 00000000101000001000 01111 10010 000 1100011
+Hexadecimal: 0x28A12163
+Explanation:
+This instruction performs a conditional branch. If the values in registers a5 and s2 are equal, the program jumps to the address 0x10108 (i.e., main+0x58).
+
+12. sh s3, 32(sp)
+Type: S-Type
+Opcode (sh - Store Halfword): 0100011 (7 bits)
+Fields:
+imm (32): 000000010000 (12-bit immediate, split as imm[11:5] and imm[4:0])
+imm[11:5]: 0000001 (7 bits)
+imm[4:0]: 00000 (5 bits)
+rs1 (sp): x2 = 00010 (5 bits)
+rs2 (s3): x19 = 10011 (5 bits)
+funct3: 001 (3 bits for store halfword)
+32-Bit Instruction Encoding:
+Binary: 0000001 00000 00010 001 10011 0100011
+Hexadecimal: 0x02012123
+Explanation:
+This instruction stores the 2-byte halfword from register s3 into the memory address 32 bytes offset from the stack pointer (sp).
+
+
