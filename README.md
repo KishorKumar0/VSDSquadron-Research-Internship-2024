@@ -392,21 +392,21 @@ J-type instructions enable **unconditional jumps** within the code. The 20-bit i
 ## Part 2: Identifying 15 unique RISC-V instructions from `cpu.o` Assembly Code along with the 32-Bit Instruction Code:
 | Instruction No. | RISC_V Instruction | 32-Bit Instruction Code |
 | :---: | :--- | :---: |
-| 1.  | `lui     a0, 0x2b`       | `0002b537` | 
-| 2.  | `addi    a0, a0, -544`   | `de050513` | 
-| 3.  | `sd      s3, 40(sp)`     | `03313423` | 
-| 4.  | `jal     ra, 10634`      | `55c000ef` | 
-| 5.  | `li      s2, 5`          | `00500913` | 
-| 6.  | `addiw   s0, s0, 1`      | `0014041b` |
-| 7.  | `mv      a1, s0`         | `00040593` |
-| 8.  | `bne     s0, s2, 100ec`  | `ff2410e3` |
-| 9.  | `lw      a4, 8(sp)`      | `00812703` |
-| 10. | `blt     a4, a2, 101dc`  | `0cc74063` |
-| 11. | `sext.w  a5, a4`         | `0007079b` |
-| 12. | `ld      s0, 64(sp)`     | `04013403` |
-| 13. | `j       10174`          | `fcdff06f` |
-| 14. | `ret`                    | `00008067` |
-| 15. | `xor     a8, a1, a4`     | `0040C433` |
+| 1.  | `addi sp, sp, -400`                | `0xffc10113` | 
+| 2.  | `sd s9, 312(sp)`                   | `0x13E12923` | 
+| 3.  | `ld ra, 392(sp)`                   | `0x18810283` | 
+| 4.  | `lui s8, 0x2b`                     | `0x02b1837` | 
+| 5.  | `li a2, 256`                       | `0x10000693` | 
+| 6.  | `sb zero, 301(sp)`                 | `0x4B016023` |
+| 7.  | `sw zero, 40(sp)`                  | `0x02802023` |
+| 8.  | `jal ra, 108b8 <memset>`           | `0x108B8F7F` |
+| 9.  | `lbu a5, 13(sp)`                   | `0x00D30393` |
+| 10. | `andi a5, a5, 223`                 | `0x00DE7393` |
+| 11. | `beq a5, s2, 10108 <main+0x58>`    | `0x28A12163` |
+| 12. | `sub a2, a2, a0`                   | `0x40028233` |
+| 13. | `xori a5, a5, 1`                   | `0x00130393` |
+| 14. | `add a6, a6, a1`                   | `0x00030333` |
+| 15. | `addiw   a5,a5,6`                  | `0x00630393` |
 
 ### RISC-V Instruction Breakdown
 
@@ -422,203 +422,203 @@ J-type instructions enable **unconditional jumps** within the code. The 20-bit i
    - **Binary**: 111111001100 00010 000 00010 0010011
    - **Hexadecimal**: 0xffc10113
 ##### Explanation:
-   - **Purpose**: Adjusts the stack pointer (sp) by -400, reserving stack space.
+This instruction is part of the RISC-V ISA and demonstrates the use of the addi (add immediate) opcode. It modifies the stack pointer (sp) by a constant value, commonly used for memory allocation on the stack.
 
 #### 2. sd s9, 312(sp)
 ##### Type: S-Type
 ##### Opcode (sd - Store Doubleword): 0100011 (7 bits)
 ##### Fields:
-   - imm (312): 000010011100 (12-bit immediate, split as imm[11:5] and imm[4:0])
-   - rs1 (sp): x2 = 00010 (5 bits)
-   - rs2 (s9): x25 = 11001 (5 bits)
-   - funct3: 011 (3 bits for store doubleword)
+   - **imm (312)**: 000010011100 (12-bit immediate, split as imm[11:5] and imm[4:0])
+   - **rs1 (sp)**: x2 = 00010 (5 bits)
+   - **rs2 (s9)**: x25 = 11001 (5 bits)
+   - **funct3**: 011 (3 bits for store doubleword)
 ##### 32-Bit Instruction Encoding:
-   - Binary: 0000100 11100 11001 010 00010 0100011
-   - Hexadecimal: 0x13E12923
+   - **Binary**: 0000100 11100 11001 010 00010 0100011
+   - **Hexadecimal**: 0x13E12923
 ##### Explanation:
 This instruction stores the value in register s9 at the memory address offset by 312 bytes from sp (stack pointer).
 
-3. ld ra, 392(sp)
-Type: I-Type
-Opcode (ld - Load Doubleword): 0000011 (7 bits)
-Fields:
-rd (ra): x1 = 00001 (5 bits)
-rs1 (sp): x2 = 00010 (5 bits)
-funct3: 011 (3 bits for load doubleword)
-Immediate (392): 000110001000 (12 bits)
-32-Bit Instruction Encoding:
-Binary: 000110001000 00010 011 00001 0000011
-Hexadecimal: 0x18810283
-Explanation:
+#### 3. ld ra, 392(sp)
+##### Type: I-Type
+##### Opcode (ld - Load Doubleword): 0000011 (7 bits)
+##### Fields:
+   - **rd (ra)**: x1 = 00001 (5 bits)
+   - **rs1 (sp)**: x2 = 00010 (5 bits)
+   - **funct3**: 011 (3 bits for load doubleword)
+   - **Immediate (392)**: 000110001000 (12 bits)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 000110001000 00010 011 00001 0000011
+   - **Hexadecimal**: 0x18810283
+##### Explanation:
 This instruction loads a doubleword from the memory address at 392 bytes offset from sp (stack pointer) into the ra register (return address).
 
-4. lui s8, 0x2b
-Type: U-Type
-Opcode (lui - Load Upper Immediate): 0110111 (7 bits)
-Fields:
-rd (s8): x24 = 11000 (5 bits)
-Immediate (0x2b): 000000000000000000101011 (upper 20 bits)
-32-Bit Instruction Encoding:
-Binary: 000000000000000000101011 11000 0110111
-Hexadecimal: 0x02b1837
-Explanation:
+#### 4. lui s8, 0x2b
+##### Type: U-Type
+##### Opcode (lui - Load Upper Immediate): 0110111 (7 bits)
+##### Fields:
+   - **rd (s8)**: x24 = 11000 (5 bits)
+   - **Immediate (0x2b)**: 000000000000000000101011 (upper 20 bits)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 000000000000000000101011 11000 0110111
+   - **Hexadecimal**: 0x02b1837
+##### Explanation:
 This instruction loads the 20-bit immediate value 0x2b into the upper 20 bits of the s8 register. The lower 12 bits of s8 are set to zero.
 
-5. li a2, 256
-Type: I-Type
-Opcode (addi): 0010011 (7 bits)
-Fields:
-rd (a2): x12 = 01100 (5 bits)
-rs1 (x0): x0 = 00000 (5 bits)
-funct3: 000 (3 bits for add immediate)
-Immediate (256): 000010000000 (12 bits)
-32-Bit Instruction Encoding:
-Binary: 000010000000 00000 000 01100 0010011
-Hexadecimal: 0x10000693
-Explanation:
+#### 5. li a2, 256
+##### Type: I-Type
+##### Opcode (addi): 0010011 (7 bits)
+##### Fields:
+   - **rd (a2)**: x12 = 01100 (5 bits)
+   - **rs1 (x0)**: x0 = 00000 (5 bits)
+   - **funct3**: 000 (3 bits for add immediate)
+   - **Immediate (256)**: 000010000000 (12 bits)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 000010000000 00000 000 01100 0010011
+   - **Hexadecimal**: 0x10000693
+##### Explanation:
 This instruction loads 256 into register a2 by adding 256 to the value in x0 (which is always zero).
 
-6. sb zero, 301(sp)
-Type: S-Type
-Opcode (sb - Store Byte): 0100011 (7 bits)
-Fields:
-imm (301): 100101101 (12-bit immediate, split as imm[11:5] and imm[4:0])
-imm[11:5]: 1001011 (7 bits)
-imm[4:0]: 01101 (5 bits)
-rs1 (sp): x2 = 00010 (5 bits)
-rs2 (zero): x0 = 00000 (5 bits)
-funct3: 000 (3 bits for store byte)
-32-Bit Instruction Encoding:
-Binary: 1001011 00000 00010 000 01101 0100011
-Hexadecimal: 0x4B016023
-Explanation:
+#### 6. sb zero, 301(sp)
+##### Type: S-Type
+##### Opcode (sb - Store Byte): 0100011 (7 bits)
+##### Fields:
+   - **imm (301)**: 100101101 (12-bit immediate, split as imm[11:5] and imm[4:0])
+   - **imm[11:5]**: 1001011 (7 bits)
+   - **imm[4:0]**: 01101 (5 bits)
+   - **rs1 (sp)**: x2 = 00010 (5 bits)
+   - **rs2 (zero)**: x0 = 00000 (5 bits)
+   - **funct3**: 000 (3 bits for store byte)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 1001011 00000 00010 000 01101 0100011
+   - **Hexadecimal**: 0x4B016023
+##### Explanation:
 This instruction stores the least significant byte from register zero (always 0) into the memory address calculated by adding 301 to the stack pointer (sp).
 
-7. sw zero, 40(sp)
-Type: S-Type
-Opcode (sw - Store Word): 0100011 (7 bits)
-Fields:
-imm (40): 000000010100 (12-bit immediate, split as imm[11:5] and imm[4:0])
-imm[11:5]: 0000000 (7 bits)
-imm[4:0]: 10100 (5 bits)
-rs1 (sp): x2 = 00010 (5 bits)
-rs2 (zero): x0 = 00000 (5 bits)
-funct3: 010 (3 bits for store word)
-32-Bit Instruction Encoding:
-Binary: 0000000 00000 00010 010 10100 0100011
-Hexadecimal: 0x02802023
-Explanation:
+#### 7. sw zero, 40(sp)
+##### Type: S-Type
+##### Opcode (sw - Store Word): 0100011 (7 bits)
+##### Fields:
+   - **imm (40)**: 000000010100 (12-bit immediate, split as imm[11:5] and imm[4:0])
+   - **imm[11:5]**: 0000000 (7 bits)
+   - **imm[4:0]**: 10100 (5 bits)
+   - **rs1 (sp)**: x2 = 00010 (5 bits)
+   - **rs2 (zero)**: x0 = 00000 (5 bits)
+   - **funct3**: 010 (3 bits for store word)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 0000000 00000 00010 010 10100 0100011
+   - **Hexadecimal**: 0x02802023
+##### Explanation:
 This instruction stores the 4-byte word from register zero (which holds 0) into the memory address calculated by adding 40 to the stack pointer (sp).
 
-8. jal ra, 108b8 <memset>
-Type: J-Type
-Opcode (jal - Jump and Link): 1101111 (7 bits)
-Fields:
-rd (ra): x1 = 00001 (5 bits)
-Immediate (108b8): 000000001000100111011000 (20-bit immediate, split across fields)
-Target Address: 0x108b8, which is the offset to the memset function.
-32-Bit Instruction Encoding:
-Binary: 000000001000100111011000 00001 1101111
-Hexadecimal: 0x108B8F7F
-Explanation:
+#### 8. jal ra, 108b8 <memset>
+##### Type: J-Type
+##### Opcode (jal - Jump and Link): 1101111 (7 bits)
+##### Fields:
+   - **rd (ra)**: x1 = 00001 (5 bits)
+   - **Immediate (108b8)**: 000000001000100111011000 (20-bit immediate, split across fields)
+   - **Target Address**: 0x108b8, which is the offset to the memset function.
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 000000001000100111011000 00001 1101111
+   - **Hexadecimal**: 0x108B8F7F
+##### Explanation:
 This instruction performs an unconditional jump to the address 0x108b8 (i.e., memset) and saves the return address (the address of the instruction following the jump) in the ra (return address) register.
 
-9. lbu a5, 13(sp)
-Type: I-Type
-Opcode (lbu - Load Byte Unsigned): 0000011 (7 bits)
-Fields:
-rd (a5): x15 = 01111 (5 bits)
-rs1 (sp): x2 = 00010 (5 bits)
-funct3: 100 (3 bits for load byte unsigned)
-Immediate (13): 0000000001101 (12 bits)
-32-Bit Instruction Encoding:
-Binary: 0000000001101 00010 100 01111 0000011
-Hexadecimal: 0x00D30393
-Explanation:
+#### 9. lbu a5, 13(sp)
+##### Type: I-Type
+##### Opcode (lbu - Load Byte Unsigned): 0000011 (7 bits)
+##### Fields:
+   - **rd (a5)**: x15 = 01111 (5 bits)
+   - **rs1 (sp)**: x2 = 00010 (5 bits)
+   - **funct3**: 100 (3 bits for load byte unsigned)
+   - **Immediate (13)**: 0000000001101 (12 bits)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 0000000001101 00010 100 01111 0000011
+   - **Hexadecimal**: 0x00D30393
+##### Explanation:
 This instruction loads an unsigned byte from the memory address 13 bytes offset from the stack pointer (sp) into register a5.
 
-10. andi a5, a5, 223
-Type: I-Type
-Opcode (andi - AND Immediate): 0010011 (7 bits)
-Fields:
-rd (a5): x15 = 01111 (5 bits)
-rs1 (a5): x15 = 01111 (5 bits)
-funct3: 111 (3 bits for AND immediate)
-Immediate (223): 000000001110111 (12 bits)
-32-Bit Instruction Encoding:
-Binary: 000000001110111 01111 111 01111 0010011
-Hexadecimal: 0x00DE7393
-Explanation:
+#### 10. andi a5, a5, 223
+##### Type: I-Type
+##### Opcode (andi - AND Immediate): 0010011 (7 bits)
+##### Fields:
+   - **rd (a5)**: x15 = 01111 (5 bits)
+   - **rs1 (a5)**: x15 = 01111 (5 bits)
+   - **funct3**: 111 (3 bits for AND immediate)
+   - **Immediate (223)**: 000000001110111 (12 bits)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 000000001110111 01111 111 01111 0010011
+   - **Hexadecimal**: 0x00DE7393
+##### Explanation:
 This instruction performs a bitwise AND operation between the value in register a5 and the immediate value 223, storing the result back in a5.
 
-11. beq a5, s2, 10108 <main+0x58>
-Type: B-Type
-Opcode (beq - Branch if Equal): 1100011 (7 bits)
-Fields:
-rs1 (a5): x15 = 01111 (5 bits)
-rs2 (s2): x18 = 10010 (5 bits)
-funct3: 000 (3 bits for "equal" comparison)
-Immediate (10108): 00000000101000001000 (12-bit immediate, split across fields)
-32-Bit Instruction Encoding:
-Binary: 00000000101000001000 01111 10010 000 1100011
-Hexadecimal: 0x28A12163
-Explanation:
+#### 11. beq a5, s2, 10108 <main+0x58>
+##### Type: B-Type
+##### Opcode (beq - Branch if Equal): 1100011 (7 bits)
+##### Fields:
+   - **rs1 (a5)**: x15 = 01111 (5 bits)
+   - **rs2 (s2)**: x18 = 10010 (5 bits)
+   - **funct3**: 000 (3 bits for "equal" comparison)
+   - **Immediate (10108)**: 00000000101000001000 (12-bit immediate, split across fields)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 00000000101000001000 01111 10010 000 1100011
+   - **Hexadecimal**: 0x28A12163
+##### Explanation:
 This instruction performs a conditional branch. If the values in registers a5 and s2 are equal, the program jumps to the address 0x10108 (i.e., main+0x58).
 
-12. sub a2, a2, a0
-Type: R-Type
-Opcode (sub - Subtract): 0110011 (7 bits)
-Fields:
-rd (a2): x10 = 01010 (5 bits)
-rs1 (a2): x10 = 01010 (5 bits)
-rs2 (a0): x10 = 00000 (5 bits)
-funct3: 000 (3 bits for subtraction)
-funct7: 0100000 (7 bits for subtraction)
-32-Bit Instruction Encoding:
-Binary: 0100000 01010 00000 000 01010 0110011
-Hexadecimal: 0x40028233
-Explanation:
+#### 12. sub a2, a2, a0
+##### Type: R-Type
+##### Opcode (sub - Subtract): 0110011 (7 bits)
+##### Fields:
+   - **rd (a2)**: x10 = 01010 (5 bits)
+   - **rs1 (a2)**: x10 = 01010 (5 bits)
+   - **rs2 (a0)**: x10 = 00000 (5 bits)
+   - **funct3**: 000 (3 bits for subtraction)
+   - **funct7**: 0100000 (7 bits for subtraction)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 0100000 01010 00000 000 01010 0110011
+   - **Hexadecimal**: 0x40028233
+##### Explanation:
 This instruction subtracts the value in register a0 from the value in register a2 and stores the result in register a2.
 
-13. xori a5, a5, 1
-Type: R-Type
-Opcode (xori - XOR Immediate): 0010011 (7 bits)
-Fields:
-rd (a5): x15 = 01111 (5 bits)
-rs1 (a5): x15 = 01111 (5 bits)
-funct3: 100 (3 bits for XOR immediate)
-Immediate (1): 000000000001 (12 bits)
-32-Bit Instruction Encoding:
-Binary: 000000000001 01111 100 01111 0010011
-Hexadecimal: 0x00130393
-Explanation:
+#### 13. xori a5, a5, 1
+##### Type: R-Type
+##### Opcode (xori - XOR Immediate): 0010011 (7 bits)
+##### Fields:
+   - **rd (a5)**: x15 = 01111 (5 bits)
+   - **rs1 (a5)**: x15 = 01111 (5 bits)
+   - **funct3**: 100 (3 bits for XOR immediate)
+   - **Immediate (1)**: 000000000001 (12 bits)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 000000000001 01111 100 01111 0010011
+   - **Hexadecimal**: 0x00130393
+##### Explanation:
 This instruction performs a bitwise XOR between the value in register a5 and the immediate value 1, storing the result back into register a5. This is commonly used for toggling the least significant bit of a5.
 
-14. add a6, a6, a1
-Type: R-Type
-Opcode (add - Addition): 0110011 (7 bits)
-Fields:
-rd (a6): x16 = 10000 (5 bits)
-rs1 (a6): x16 = 10000 (5 bits)
-rs2 (a1): x11 = 01011 (5 bits)
-funct3: 000 (3 bits for addition)
-funct7: 0000000 (7 bits for addition)
-32-Bit Instruction Encoding:
-Binary: 0000000 10000 01011 000 10000 0110011
-Hexadecimal: 0x00030333
-Explanation:
+#### 14. add a6, a6, a1
+##### Type: R-Type
+##### Opcode (add - Addition): 0110011 (7 bits)
+##### Fields:
+   - **rd (a6)**: x16 = 10000 (5 bits)
+   - **rs1 (a6)**: x16 = 10000 (5 bits)
+   - **rs2 (a1)**: x11 = 01011 (5 bits)
+   - **funct3**: 000 (3 bits for addition)
+   - **funct7**: 0000000 (7 bits for addition)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 0000000 10000 01011 000 10000 0110011
+   - **Hexadecimal**: 0x00030333
+##### Explanation:
 This instruction adds the value in register a1 to the value in register a6 and stores the result in register a6.
 
-15. addiw   a5,a5,6
-Type: I-Type (for Immediate Addition to Word)
-Opcode (addiw - Add Immediate to Word): 0010011 (7 bits)
-Fields:
-rd (a5): x15 = 01111 (5 bits)
-rs1 (a5): x15 = 01111 (5 bits)
-funct3: 000 (3 bits for addition)
-Immediate (6): 000000000110 (12 bits)
-32-Bit Instruction Encoding:
-Binary: 000000000110 01111 000 01111 0010011
-Hexadecimal: 0x00630393
-Explanation:
+#### 15. addiw   a5,a5,6
+##### Type: I-Type (for Immediate Addition to Word)
+##### Opcode (addiw - Add Immediate to Word): 0010011 (7 bits)
+##### Fields:
+   - **rd (a5)**: x15 = 01111 (5 bits)
+   - **rs1 (a5)**: x15 = 01111 (5 bits)
+   - **funct3**: 000 (3 bits for addition)
+   - **Immediate (6)**: 000000000110 (12 bits)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 000000000110 01111 000 01111 0010011
+   - **Hexadecimal**: 0x00630393
+##### Explanation:
 This instruction adds the immediate value 6 to the value in register a5, and stores the result in register a5. The operation is done on a 32-bit signed value (hence addiw for adding an immediate to a word).
