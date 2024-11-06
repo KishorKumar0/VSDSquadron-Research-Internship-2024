@@ -565,20 +565,60 @@ Hexadecimal: 0x28A12163
 Explanation:
 This instruction performs a conditional branch. If the values in registers a5 and s2 are equal, the program jumps to the address 0x10108 (i.e., main+0x58).
 
-12. sh s3, 32(sp)
-Type: S-Type
-Opcode (sh - Store Halfword): 0100011 (7 bits)
+12. sub a2, a2, a0
+Type: R-Type
+Opcode (sub - Subtract): 0110011 (7 bits)
 Fields:
-imm (32): 000000010000 (12-bit immediate, split as imm[11:5] and imm[4:0])
-imm[11:5]: 0000001 (7 bits)
-imm[4:0]: 00000 (5 bits)
-rs1 (sp): x2 = 00010 (5 bits)
-rs2 (s3): x19 = 10011 (5 bits)
-funct3: 001 (3 bits for store halfword)
+rd (a2): x10 = 01010 (5 bits)
+rs1 (a2): x10 = 01010 (5 bits)
+rs2 (a0): x10 = 00000 (5 bits)
+funct3: 000 (3 bits for subtraction)
+funct7: 0100000 (7 bits for subtraction)
 32-Bit Instruction Encoding:
-Binary: 0000001 00000 00010 001 10011 0100011
-Hexadecimal: 0x02012123
+Binary: 0100000 01010 00000 000 01010 0110011
+Hexadecimal: 0x40028233
 Explanation:
-This instruction stores the 2-byte halfword from register s3 into the memory address 32 bytes offset from the stack pointer (sp).
+This instruction subtracts the value in register a0 from the value in register a2 and stores the result in register a2.
 
+13. xori a5, a5, 1
+Type: R-Type
+Opcode (xori - XOR Immediate): 0010011 (7 bits)
+Fields:
+rd (a5): x15 = 01111 (5 bits)
+rs1 (a5): x15 = 01111 (5 bits)
+funct3: 100 (3 bits for XOR immediate)
+Immediate (1): 000000000001 (12 bits)
+32-Bit Instruction Encoding:
+Binary: 000000000001 01111 100 01111 0010011
+Hexadecimal: 0x00130393
+Explanation:
+This instruction performs a bitwise XOR between the value in register a5 and the immediate value 1, storing the result back into register a5. This is commonly used for toggling the least significant bit of a5.
 
+14. add a6, a6, a1
+Type: R-Type
+Opcode (add - Addition): 0110011 (7 bits)
+Fields:
+rd (a6): x16 = 10000 (5 bits)
+rs1 (a6): x16 = 10000 (5 bits)
+rs2 (a1): x11 = 01011 (5 bits)
+funct3: 000 (3 bits for addition)
+funct7: 0000000 (7 bits for addition)
+32-Bit Instruction Encoding:
+Binary: 0000000 10000 01011 000 10000 0110011
+Hexadecimal: 0x00030333
+Explanation:
+This instruction adds the value in register a1 to the value in register a6 and stores the result in register a6.
+
+15. addiw   a5,a5,6
+Type: I-Type (for Immediate Addition to Word)
+Opcode (addiw - Add Immediate to Word): 0010011 (7 bits)
+Fields:
+rd (a5): x15 = 01111 (5 bits)
+rs1 (a5): x15 = 01111 (5 bits)
+funct3: 000 (3 bits for addition)
+Immediate (6): 000000000110 (12 bits)
+32-Bit Instruction Encoding:
+Binary: 000000000110 01111 000 01111 0010011
+Hexadecimal: 0x00630393
+Explanation:
+This instruction adds the immediate value 6 to the value in register a5, and stores the result in register a5. The operation is done on a 32-bit signed value (hence addiw for adding an immediate to a word).
