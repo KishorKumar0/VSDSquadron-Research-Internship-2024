@@ -347,6 +347,8 @@ For example, a program may:
 ## Part 1: Instruction Types and Formats
 ### 1. R-Type Instructions
 R-type instructions perform **register-to-register operations** commonly used for arithmetic and logical operations (e.g., addition, subtraction, bitwise operations). The R-type instruction format includes fields for destination and source registers and function codes that specify the operation.
+##### Bit Pattern:
+![image](./Task2/R_Type_Instruction.png)
 - **Field Descriptions**:
    - **opcode**: Operation code (e.g., 0110011 for R-type).
    - **rd**: Destination register.
@@ -355,6 +357,8 @@ R-type instructions perform **register-to-register operations** commonly used fo
    - **funct7**: Extra bits to further define the operation (e.g., 0000000 for ADD, 0100000 for SUB).
 ### 2. I-Type Instructions
 I-type instructions use an **immediate** (constant) value and are commonly applied for arithmetic with constants, load instructions, and certain branch conditions. This format is essential for instructions that need a value embedded in the instruction.
+##### Bit Pattern:
+![image](./Task2/I_Type_Instruction.png)
 - **Field Descriptions**:
    - **opcode**: Operation code (e.g., 0010011 for immediate instructions).
    - **rd**: Destination register.
@@ -363,6 +367,8 @@ I-type instructions use an **immediate** (constant) value and are commonly appli
    - **imm**: Immediate value (signed 12-bit).
 ### 3. S-Type Instructions
 S-type instructions manage **store operations** and transfer data from a register to memory. The immediate value here is split across two parts, imm[11:5] and imm[4:0].
+##### Bit Pattern:
+![image](./Task2/S_Type_Instruction.png)
 - **Field Descriptions**:
    - **opcode**: Operation code (e.g., 0100011 for store instructions).
    - **imm[11:5] and imm[4:0]**: Combined to form a 12-bit immediate value.
@@ -371,6 +377,8 @@ S-type instructions manage **store operations** and transfer data from a registe
    - **funct3**: Defines the type of store operation (e.g., byte, word).
 ### 4. B-Type Instructions
 B-type instructions handle **conditional branches** based on register values. The 12-bit immediate value for B-type instructions is spread across the instruction bits for encoding.
+##### Bit Pattern:
+![image](./Task2/B_Type_Instruction.png)
 - **Field Descriptions**:
    - **opcode**: Operation code for branches (e.g., 1100011).
    - **imm**: Immediate value (split across several fields).
@@ -378,12 +386,16 @@ B-type instructions handle **conditional branches** based on register values. Th
    - **funct3**: Defines branch type (e.g., equal, not equal).
 ### 5. U-Type Instructions
 U-type instructions use an **upper immediate value** to directly set higher-order bits in a register, typically for operations involving addresses or larger constants.
+##### Bit Pattern:
+![image](./Task2/U_Type_Instruction.png)
 - **Field Descriptions**:
    - **opcode**: Operation code for U-type (e.g., 0110111 for LUI).
    - **rd**: Destination register.
    - **imm**: 20-bit immediate value shifted left by 12 bits.
 ### 6. J-Type Instructions
 J-type instructions enable **unconditional jumps** within the code. The 20-bit immediate value is scattered across the bit fields to support larger jump offsets.
+##### Bit Pattern:
+![image](./Task2/J_Type_Instruction.png)
 - **Field Descriptions**:
    - **opcode**: Operation code for jumps (e.g., 1101111 for JAL).
    - **rd**: Destination register (often stores the return address).
