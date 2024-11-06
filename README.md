@@ -389,7 +389,7 @@ J-type instructions enable **unconditional jumps** within the code. The 20-bit i
    - **rd**: Destination register (often stores the return address).
    - **imm**: 20-bit immediate value for jump offset.
 
-## Part 1: Identifying 15 unique RISC-V instructions from `Max_Min_Detector.o` Assembly Code along with the 32-Bit Instruction Code:
+## Part 2: Identifying 15 unique RISC-V instructions from `cpu.o` Assembly Code along with the 32-Bit Instruction Code:
 | Instruction No. | RISC_V Instruction | 32-Bit Instruction Code |
 | :---: | :--- | :---: |
 | 1.  | `lui     a0, 0x2b`       | `0002b537` | 
