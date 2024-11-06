@@ -342,7 +342,7 @@ For example, a program may:
 ![image](./Task1/cpu_output.png)
 
 
-# TASK 2: RISC-V Instruction Types OvervieW
+# TASK 2: RISC-V Instruction Types Overview
 
 ## Part 1: Instruction Types and Formats
 ### 1. R-Type Instructions
