@@ -389,3 +389,51 @@ J-type instructions enable **unconditional jumps** within the code. The 20-bit i
    - **rd**: Destination register (often stores the return address).
    - **imm**: 20-bit immediate value for jump offset.
 
+## Part 1: Identifying 15 unique RISC-V instructions from `Max_Min_Detector.o` Assembly Code along with the 32-Bit Instruction Code:
+| Instruction No. | RISC_V Instruction | 32-Bit Instruction Code |
+| :---: | :--- | :---: |
+| 1.  | `lui     a0, 0x2b`       | `0002b537` | 
+| 2.  | `addi    a0, a0, -544`   | `de050513` | 
+| 3.  | `sd      s3, 40(sp)`     | `03313423` | 
+| 4.  | `jal     ra, 10634`      | `55c000ef` | 
+| 5.  | `li      s2, 5`          | `00500913` | 
+| 6.  | `addiw   s0, s0, 1`      | `0014041b` |
+| 7.  | `mv      a1, s0`         | `00040593` |
+| 8.  | `bne     s0, s2, 100ec`  | `ff2410e3` |
+| 9.  | `lw      a4, 8(sp)`      | `00812703` |
+| 10. | `blt     a4, a2, 101dc`  | `0cc74063` |
+| 11. | `sext.w  a5, a4`         | `0007079b` |
+| 12. | `ld      s0, 64(sp)`     | `04013403` |
+| 13. | `j       10174`          | `fcdff06f` |
+| 14. | `ret`                    | `00008067` |
+| 15. | `xor     a8, a1, a4`     | `0040C433` |
+
+### RISC-V Instruction Breakdown
+
+#### 1. addi sp, sp, -400
+##### **Type**: I-Type
+##### **Opcode** (addi): 0010011 (7 bits)
+##### Fields:
+   - **rd (sp)**: x2 = 00010 (5 bits)
+   - **rs1 (sp)**: x2 = 00010 (5 bits)
+   - **funct3**: 000 (3 bits, specifying "addi")
+   - **Immediate (-400)**: 111111001100 (12 bits in two's complement)
+##### 32-Bit Instruction Encoding:
+   - **Binary**: 111111001100 00010 000 00010 0010011
+   - **Hexadecimal**: 0xffc10113
+##### Explanation:
+   - **Purpose**: Adjusts the stack pointer (sp) by -400, reserving stack space.
+
+#### 2. sd s9, 312(sp)
+##### Type: S-Type
+##### Opcode (sd - Store Doubleword): 0100011 (7 bits)
+##### Fields:
+   - imm (312): 000010011100 (12-bit immediate, split as imm[11:5] and imm[4:0])
+   - rs1 (sp): x2 = 00010 (5 bits)
+   - rs2 (s9): x25 = 11001 (5 bits)
+   - funct3: 011 (3 bits for store doubleword)
+##### 32-Bit Instruction Encoding:
+   - Binary: 0000100 11100 11001 010 00010 0100011
+   - Hexadecimal: 0x13E12923
+##### Explanation:
+This instruction stores the value in register s9 at the memory address offset by 312 bytes from sp (stack pointer).
