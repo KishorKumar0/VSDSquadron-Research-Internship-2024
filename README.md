@@ -643,20 +643,26 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
          $ cd my_riscv_project
 
    ```
-2. **Installing Simulation Tools: Install Icarus Verilog and GTKWave for Verilog simulation and waveform viewing.**
+   ![image](./Task3/cloning.png)
+   
+3. **Installing Simulation Tools: Install Icarus Verilog and GTKWave for Verilog simulation and waveform viewing.**
    ```
          $ sudo apt update
          $ sudo apt install iverilog gtkwave
    ```
-3. **To simulate and run the verilog code**
+   ![image](./Task3/installation.png)
+   
+5. **To simulate and run the verilog code**
    ```
        $ iverilog -o rv32i_simulation iiitb_rv32i.v iiitb_rv32i_tb.v
        $ vvp rv32i_simulation
    ```
-4. **To view the output waveform in gtkwave**
+6. **To view the output waveform in gtkwave**
    ```
        $ gtkwave simulation.vcd
    ```
+   ![image](./Task3/gtkwave.png)
+   
 ## Simulation Output
 ### 1. Instruction at MEM[0] - `0x02208300`
 #### Assembly Equivalent: `add r6, r1, r2`
