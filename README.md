@@ -672,6 +672,8 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **MEM Stage**: No memory access for this instruction.
 - **WB Stage**: `REG[6]` is updated with `3`.
 
+![image](./Task3/add.png)
+
 ### 2. Instruction at MEM[1] - `0x02209380`
 #### Assembly Equivalent: `sub r7, r1, r2`
 - **IF Stage**: Instruction fetch loads `0x02209380`.
@@ -680,6 +682,8 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **MEM Stage**: No memory access.
 - **WB Stage**: `REG[7]` is updated with `0xFFFFFFFF`.
 
+![image](./Task3/sub.png)
+
 ### 3. Instruction at MEM[2] - `0x0230A400`
 #### Assembly Equivalent: `and r8, r1, r3`
 - **IF Stage**: Instruction fetch loads `0x0230A400`.
@@ -687,6 +691,8 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **EX Stage**: `EX_MEM_ALUOUT` calculates `REG[1] & REG[3]`, which is `1 & 3 = 1`.
 - **MEM Stage**: No memory access.
 - **WB Stage**: `REG[8]` is updated with `1`.
+
+![image](./Task3/and.png)
 
 ### 4. Instruction at MEM[3] - `0x02513480`
 #### Assembly Equivalent: `or r9, r2, r5`
@@ -704,6 +710,8 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **MEM Stage**: No memory access.
 - **WB Stage**: `REG[10]` is updated with `5`.
 
+![image](./Task3/xor.png)
+
 ### 6. Instruction at MEM[5] - `0x02415580`
 #### Assembly Equivalent: `slt r11, r2, r4`
 - **IF Stage**: Instruction fetch loads ``0x02415580``.
@@ -711,6 +719,8 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **EX Stage**: `EX_MEM_ALUOUT` sets `1` if `REG[2] < REG[4]` (which is true since `2 < 4`).
 - **MEM Stage**: No memory access.
 - **WB Stage**: `REG[11]` is updated with `1`.
+
+![image](./Task3/slt.png)
 
 ### 7. Instruction at MEM[6] - `0x00520600`
 #### Assembly Equivalent: `addi r12, r4, 5`
@@ -720,6 +730,8 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **MEM Stage**: No memory access.
 - **WB Stage**: `REG[12]` is updated with `9`.
 
+![image](./Task3/addi.png)
+
 ### 8. Instruction at MEM[7] - `0x00209181`
 #### Assembly Equivalent: `sw r3, r1, 2`
 - **IF Stage**: Instruction fetch loads `0x00209181`.
@@ -727,6 +739,8 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **EX Stage**: `EX_MEM_ALUOUT` calculates the address `REG[1] + 2`, which is `1 + 2 = 3`.
 - **MEM Stage**: `DM[3]` is set to `REG[3]`, storing `3` at address `3` in data memory.
 - **WB Stage**: No register write-back for store operations.
+
+![image](./Task3/sw.png)
 
 ### 9. Instruction at MEM[8] - `0x00208681`
 #### Assembly Equivalent: `lw r13, r1, 2`
@@ -736,6 +750,8 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **MEM Stage**: Loads `DM[3]` into `MEM_WB_LDM`, retrieving `3`.
 - **WB Stage**: `REG[13]` is updated with `3`.
 
+![image](./Task3/lw.png)
+
 ### 10. Instruction at MEM[9] - `0x00F00002`
 #### Assembly Equivalent: `beq r0, r0, 15`
 - **IF Stage**: Instruction fetch loads `0x00F00002`.
@@ -744,6 +760,8 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **MEM Stage**: No memory access.
 - **WB Stage**: No register write-back.
 
+![image](./Task3/beq.png)
+
 ### 11. Instruction at MEM[25] - `0x00210700`
 #### Assembly Equivalent: `dd r14, r2, r2`
 - **IF Stage**: Instruction fetch loads `0x00210700`.
@@ -751,3 +769,5 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **EX Stage**: `EX_MEM_ALUOUT` calculates `REG[2] + REG[2]`, which is `2 + 2 = 4`.
 - **MEM Stage**: No memory access.
 - **WB Stage**: `REG[14]` is updated with `4`.
+
+![image](./Task3/add2.png)
