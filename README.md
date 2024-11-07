@@ -634,3 +634,114 @@ This instruction adds the value in register a1 to the value in register a6 and s
    - **Hexadecimal**: 0x00630393
 - **Explanation**:
 This instruction adds the immediate value 6 to the value in register a5, and stores the result in register a5. The operation is done on a 32-bit signed value (hence addiw for adding an immediate to a word).
+
+# TASK 1: Using this RISC-V Core Verilog netlist and testbench for functional simulation experiment.
+1. **Clone the Reference Repository: this repository that contains the Verilog netlist and testbench**
+   ```
+         $ git clone https://github.com/vinayrayapati/rv32i.git my_riscv_project
+      
+         $ cd my_riscv_project
+
+   ```
+2. **Installing Simulation Tools: Install Icarus Verilog and GTKWave for Verilog simulation and waveform viewing.**
+   ```
+         $ sudo apt update
+         $ sudo apt install iverilog gtkwave
+   ```
+3. **To simulate and run the verilog code**
+   ```
+       $ iverilog -o rv32i_simulation iiitb_rv32i.v iiitb_rv32i_tb.v
+       $ vvp rv32i_simulation
+   ```
+4. **To view the output waveform in gtkwave**
+   ```
+       $ gtkwave simulation.vcd
+   ```
+## Simulation Output
+### 1. Instruction at MEM[0] - `0x02208300`
+#### Assembly Equivalent: `add r6, r1, r2`
+- **IF Stage**: Instruction fetch loads `0x022083001.
+- **ID Stage**: Decodes to 1ADD r6, r1, r2`. `ID_EX_A` is loaded with `REG[1]` and `ID_EX_B` with `REG[2]`.
+- **EX Stage**: `EX_MEM_ALUOUT` calculates `REG[1] + REG[2]`, which is `1 + 2 = 3`.
+- **MEM Stage**: No memory access for this instruction.
+- **WB Stage**: `REG[6]` is updated with `3`.
+
+### 2. Instruction at MEM[1] - `0x02209380`
+#### Assembly Equivalent: `sub r7, r1, r2`
+- **IF Stage**: Instruction fetch loads `0x02209380`.
+- **ID Stage**: Decodes to `SUB r7, r1, r2`. `ID_EX_A` is loaded with `REG[1]` and `ID_EX_B` with `REG[2]`.
+- **EX Stage**: `EX_MEM_ALUOUT` calculates `REG[1] - REG[2]`, which is `1 - 2 = -1` (or `0xFFFFFFFF` in 32-bit).
+- **MEM Stage**: No memory access.
+- **WB Stage**: `REG[7]` is updated with `0xFFFFFFFF`.
+
+### 3. Instruction at MEM[2] - `0x0230A400`
+#### Assembly Equivalent: `and r8, r1, r3`
+- **IF Stage**: Instruction fetch loads `0x0230A400`.
+- **ID Stage**: Decodes to `AND r8, r1, r3`. `ID_EX_A` is loaded with `REG[1]` and `ID_EX_B` with `REG[3]`.
+- **EX Stage**: `EX_MEM_ALUOUT` calculates `REG[1] & REG[3]`, which is `1 & 3 = 1`.
+- **MEM Stage**: No memory access.
+- **WB Stage**: `REG[8]` is updated with `1`.
+
+### 4. Instruction at MEM[3] - `0x02513480`
+#### Assembly Equivalent: `or r9, r2, r5`
+- **IF Stage**: Instruction fetch loads `0x02513480`.
+- **ID Stage**: Decodes to `OR r9, r2, r5`. `ID_EX_A` is loaded with `REG[2]` and `ID_EX_B` with `REG[5]`.
+- **EX Stage**: `EX_MEM_ALUOUT` calculates `REG[2] | REG[5]`, which is `2 | 5 = 7`.
+- **MEM Stage**: No memory access.
+- **WB Stage**: `REG[9]` is updated with `7`.
+
+### 5. Instruction at MEM[4] - `0x0240C500`
+#### Assembly Equivalent: `xor r10, r1, r4`
+- **IF Stage**: Instruction fetch `loads 0x0240C500`.
+- **ID Stage**: Decodes to `XOR r10, r1, r4`. `ID_EX_A` is loaded with `REG[1]` and `ID_EX_B` with `REG[4]`.
+- **EX Stage**: `EX_MEM_ALUOUT` calculates `REG[1] ^ REG[4]`, which is `1 ^ 4 = 5`.
+- **MEM Stage**: No memory access.
+- **WB Stage**: `REG[10]` is updated with `5`.
+
+### 6. Instruction at MEM[5] - `0x02415580`
+#### Assembly Equivalent: `slt r11, r2, r4`
+- **IF Stage**: Instruction fetch loads ``0x02415580``.
+- **ID Stage**: Decodes to `SLT r11, r2, r4`. `ID_EX_A` is loaded with `REG[2]` and `ID_EX_B` with `REG[4]`.
+- **EX Stage**: `EX_MEM_ALUOUT` sets `1` if `REG[2] < REG[4]` (which is true since `2 < 4`).
+- **MEM Stage**: No memory access.
+- **WB Stage**: `REG[11]` is updated with `1`.
+
+### 7. Instruction at MEM[6] - `0x00520600`
+#### Assembly Equivalent: `addi r12, r4, 5`
+- **IF Stage**: Instruction fetch loads `0x00520600`.
+- **ID Stage**: Decodes to `ADDI r12, r4, 5`. `ID_EX_A` is loaded with `REG[4]`.
+- **EX Stage**: `EX_MEM_ALUOUT` calculates `REG[4] + 5`, which is `4 + 5 = 9`.
+- **MEM Stage**: No memory access.
+- **WB Stage**: `REG[12]` is updated with `9`.
+
+### 8. Instruction at MEM[7] - `0x00209181`
+#### Assembly Equivalent: `sw r3, r1, 2`
+- **IF Stage**: Instruction fetch loads `0x00209181`.
+- **ID Stage**: Decodes to `SW r3, r1, 2`. `ID_EX_A` is loaded with `REG[1]`, and `ID_EX_IMMEDIATE` is set to `2`.
+- **EX Stage**: `EX_MEM_ALUOUT` calculates the address `REG[1] + 2`, which is `1 + 2 = 3`.
+- **MEM Stage**: `DM[3]` is set to `REG[3]`, storing `3` at address `3` in data memory.
+- **WB Stage**: No register write-back for store operations.
+
+### 9. Instruction at MEM[8] - `0x00208681`
+#### Assembly Equivalent: `lw r13, r1, 2`
+- **IF Stage**: Instruction fetch loads `0x00208681`.
+- **ID Stage**: Decodes to `LW r13, r1, 2`. `ID_EX_A` is loaded with `REG[1]`, and ID_EX_IMMEDIATE` is set to 2`.
+- **EX Stage**:`EX_MEM_ALUOUT` calculates the address `REG[1] + 2`, which is `1 + 2 = 3`.
+- **MEM Stage**: Loads `DM[3]` into `MEM_WB_LDM`, retrieving `3`.
+- **WB Stage**: `REG[13]` is updated with `3`.
+
+### 10. Instruction at MEM[9] - `0x00F00002`
+#### Assembly Equivalent: `beq r0, r0, 15`
+- **IF Stage**: Instruction fetch loads `0x00F00002`.
+- **ID Stage**: Decodes to `BEQ r0, r0, 15`. Since `REG[0] == REG[0]`, the branch is taken.
+- **EX Stage**: `EX_MEM_ALUOUT` calculates `NPC + 15`, updating `NPC` to `15`.
+- **MEM Stage**: No memory access.
+- **WB Stage**: No register write-back.
+
+### 11. Instruction at MEM[25] - `0x00210700`
+#### Assembly Equivalent: `dd r14, r2, r2`
+- **IF Stage**: Instruction fetch loads `0x00210700`.
+- **ID Stage**: Decodes to `ADD r14, r2, r2`. `ID_EX_A` and `ID_EX_B` are both loaded with `REG[2]`.
+- **EX Stage**: `EX_MEM_ALUOUT` calculates `REG[2] + REG[2]`, which is `2 + 2 = 4`.
+- **MEM Stage**: No memory access.
+- **WB Stage**: `REG[14]` is updated with `4`.
