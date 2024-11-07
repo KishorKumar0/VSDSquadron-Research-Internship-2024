@@ -635,7 +635,7 @@ This instruction adds the value in register a1 to the value in register a6 and s
 - **Explanation**:
 This instruction adds the immediate value 6 to the value in register a5, and stores the result in register a5. The operation is done on a 32-bit signed value (hence addiw for adding an immediate to a word).
 
-# TASK 1: Using this RISC-V Core Verilog netlist and testbench for functional simulation experiment.
+# TASK 3: Using this RISC-V Core Verilog netlist and testbench for functional simulation experiment.
 1. **Clone the Reference Repository: this repository that contains the Verilog netlist and testbench**
    ```
          $ git clone https://github.com/vinayrayapati/rv32i.git my_riscv_project
