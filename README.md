@@ -771,3 +771,61 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 - **WB Stage**: `REG[14]` is updated with `4`.
 
 ![image](./Task3/add2.png)
+
+# TASK 1: Interactive Art Installation with VSDsquadron Mini
+
+## Overview
+This interactive art installation project uses the VSDsquadron Mini development board to create a visual display that dynamically responds to environmental inputs—specifically sound, motion, and light. The installation will detect audio levels, movement, and ambient light changes, and use these inputs to produce unique visual patterns on an OLED display. This setup can be extended with RGB LED strips for ambient lighting, creating an immersive, interactive experience that changes based on environmental stimuli.
+
+## Components Required
+1. VSDsquadron Mini Development Board - RISC-V based microcontroller board that handles inputs and controls the display and optional LEDs.
+2. OLED Display Module (128x64) - To display dynamic graphics based on input; typically uses I2C or SPI for communication.
+3. Microphone/Sound Sensor - Detects audio levels, enabling sound-responsive visuals.
+4. PIR Motion Sensor - Senses movement, triggering specific animations or changes on the display.
+5. Light Sensor (e.g., LDR or Photodiode) - Measures ambient light levels to adjust brightness or visual patterns.
+6. Power Supply - USB power supply or battery pack to power the VSDsquadron Mini and peripherals.
+7. Optional: RGB LED Strip (WS2812B) - Provides additional ambient lighting synchronized with the display visuals.
+8. Connecting Wires - For wiring the sensors, display, and any LEDs to the board.
+
+## Circuit Connections
+Here’s a description of how to connect each component to the VSDsquadron Mini board. This setup assumes a 128x64 OLED display with an I2C interface.
+
+1. OLED Display (I2C)
+   - VCC: Connect to 3.3V on the VSDsquadron Mini.
+   - GND: Connect to GND on the VSDsquadron Mini.
+   - SCL: Connect to the I2C clock pin (typically PC1).
+   - SDA: Connect to the I2C data pin (typically PC2).
+2. Microphone/Sound Sensor
+   - VCC: Connect to 3.3V on the VSDsquadron Mini.
+   - GND: Connect to GND on the VSDsquadron Mini.
+   - OUT: Connect to an analog pin (e.g., A0) to read sound levels.
+3. PIR Motion Sensor
+   - VCC: Connect to 5V on the VSDsquadron Mini.
+   - GND: Connect to GND on the VSDsquadron Mini.
+   - OUT: Connect to a digital pin (e.g., D2) to detect motion.
+4. Light Sensor (LDR with Resistor)
+   - LDR: Connect one end to 3.3V and the other end to both A1 and a pull-down resistor (typically 10kΩ) that goes to GND.
+   - Analog Read Pin (A1): Connects to the VSDsquadron Mini to read ambient light levels.
+5. Optional: RGB LED Strip (WS2812B)
+   - VCC: Connect to 5V on the VSDsquadron Mini.
+   - GND: Connect to GND on the VSDsquadron Mini.
+   - DIN: Connect to a digital pin (e.g., PC5) on the VSDsquadron Mini.
+  
+## Pinout Diagram
+| Component | Pin on Component | Connection on VSDsquadron Mini |
+| :---: | :--- | :---: |
+| OLED Display       |  VCC        | 3.3V                        | 
+|                    |  GND        | GND                         | 
+|                    |  SCL        | PC1                         | 
+|                    |  SDA        | PC2                         | 
+| Sound Sensor       |  VCC        | 3.3V                        | 
+|                    |  GND        | GND                         |
+|                    |  OUT        | A0                          |
+| PIR Motion Sensor  |  VCC        | 5V                          |
+|                    |  GND        | GND                         |
+|                    |  OUT        | D2                          |
+| Light Sensor (LDR) |  LDR        |3.3V (one end), GND via 10kΩ |
+|                    |  Analog Pin | A1                          |
+| RGB LED Strip      |  VCC        | 5V                          |
+|                    |  GND        | GND                         |
+|                    |  DIN        | PC5                         |
