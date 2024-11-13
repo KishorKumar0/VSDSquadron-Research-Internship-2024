@@ -834,4 +834,4 @@ Here’s a description of how to connect each component to the VSDsquadron Mini 
 
 ## Circuit Diagram
 
-![image](./Tasks4/Interactive Art Installation.png)
+![image](./Tasks4/Interactive_Art_Installation.png)
