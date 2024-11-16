@@ -798,15 +798,15 @@ Here’s a description of how to connect each component to the VSDsquadron Mini 
 2. Microphone/Sound Sensor
    - VCC: Connect to 3.3V on the VSDsquadron Mini.
    - GND: Connect to GND on the VSDsquadron Mini.
-   - OUT: Connect to an analog pin (e.g., A0) to read sound levels.
+   - OUT: Connect to an analog pin (e.g., PA2) to read sound levels.
 3. PIR Motion Sensor
    - VCC: Connect to 5V on the VSDsquadron Mini.
    - GND: Connect to GND on the VSDsquadron Mini.
-   - OUT: Connect to a digital pin (e.g., D2) to detect motion.
+   - OUT: Connect to a digital pin (e.g., PD2) to detect motion.
 4. Light Sensor (LDR with Resistor)
    - GND : Connect this pin to a GND pin on the VSDsquadron Mini.
    - VCC: Connect this pin to the 3.3V or 5V output on the VSDsquadron Mini, depending on the sensor's operating voltage (most likely 3.3V if it's compatible with both).
-   - SIG (Signal): Connect this pin to an analog input pin (such as A1) on the VSDsquadron Mini to read the analog signal from the light sensor.
+   - SIG (Signal): Connect this pin to an analog input pin (such as PA1) on the VSDsquadron Mini to read the analog signal from the light sensor.
 5. Optional: RGB LED Strip (WS2812B)
    - VCC: Connect to 5V on the VSDsquadron Mini.
    - GND: Connect to GND on the VSDsquadron Mini.
@@ -821,12 +821,12 @@ Here’s a description of how to connect each component to the VSDsquadron Mini 
 |                    |  SDA        | PC2                         | 
 | Sound Sensor       |  VCC        | 3.3V                        | 
 |                    |  GND        | GND                         |
-|                    |  OUT        | A0                          |
+|                    |  OUT        | PA2                          |
 | PIR Motion Sensor  |  VCC        | 5V                          |
 |                    |  GND        | GND                         |
-|                    |  OUT        | D2                          |
+|                    |  OUT        | PD2                          |
 | Light Sensor (LDR) |  VCC        | 3.3V                        |
-|                    |  SIG        | A1                          |
+|                    |  SIG        | PA1                          |
 |                    |  GND        | GND                         |
 | RGB LED Strip      |  VCC        | 5V                          |
 |                    |  GND        | GND                         |
