@@ -772,7 +772,7 @@ This instruction adds the immediate value 6 to the value in register a5, and sto
 
 ![image](./Task3/add2.png)
 
-# TASK 4: Interactive Art Installation with VSDsquadron Mini
+<!-- # TASK 4: Interactive Art Installation with VSDsquadron Mini
 
 ## Overview
 This interactive art installation project uses the VSDsquadron Mini development board to create a visual display that dynamically responds to environmental inputs—specifically sound, motion, and light. The installation will detect audio levels, movement, and ambient light changes, and use these inputs to produce unique visual patterns on an OLED display. This setup can be extended with RGB LED strips for ambient lighting, creating an immersive, interactive experience that changes based on environmental stimuli.
@@ -834,4 +834,4 @@ Here’s a description of how to connect each component to the VSDsquadron Mini 
 
 ## Circuit Diagram
 
-![image](./Task4/Interactive_Art_Installation.png)
+![image](./Task4/Interactive_Art_Installation.png) -->
